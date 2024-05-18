@@ -5,8 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WebsocketClient"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Messages ListBox -->
+        <ListBox x:Name="MessagesListBox" Grid.Row="0" Margin="10" />
+
+        <!-- Message TextBox and Send Button -->
+        <Grid Grid.Row="1" Margin="10" VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="MessageTextBox" Grid.Column="0" Margin="0,0,10,0" />
+            <Button x:Name="SendMessageButton" Grid.Column="1" Content="Send" Click="SendMessageButton_Click" />
+        </Grid>
+
+        <!-- Connect Button -->
+        <Button x:Name="ConnectButton" Content="Connect" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10" Click="ConnectButton_Click" />
     </Grid>
 </Window>
