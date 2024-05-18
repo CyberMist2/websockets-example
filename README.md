@@ -15,7 +15,7 @@ Compile the client application with Visual Studio and open it from `..\websocket
 
 ![image](https://github.com/CyberMist2/websockets-example/assets/7664922/674a313b-7248-4a15-8008-3a02447baf47)
 
-# client commands
+# Client Commands
 *Write these commands in the client chat*
 
 Show all connected clients
