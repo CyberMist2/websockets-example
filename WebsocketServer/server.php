@@ -24,6 +24,8 @@ class Chat implements MessageComponentInterface {
         if (trim($msg) === 'hello') {
             echo "Received 'hello' from connection {$from->resourceId}\n";
             $from->send("Hello, client!");
+        } else if (trim($msg) === 'list_clients') {
+            $this->listConnectedClients($from);
         } else {
             foreach ($this->clients as $client) {
                 if ($from !== $client) {
@@ -45,6 +47,14 @@ class Chat implements MessageComponentInterface {
         echo "An error has occurred: {$e->getMessage()}\n";
 
         $conn->close();
+    }
+    
+    private function listConnectedClients(ConnectionInterface $requester) {
+        $clientList = "Connected clients:\n";
+        foreach ($this->clients as $client) {
+            $clientList .= "Client {$client->resourceId}\n";
+        }
+        $requester->send($clientList);
     }
 }
 
