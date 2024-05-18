@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocket Chat</title>
+    <style>
+        #messages {
+            border: 1px solid #ccc;
+            padding: 10px;
+            height: 200px;
+            overflow-y: scroll;
+        }
+        #message {
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div id="messages"></div>
+    <input type="text" id="message" placeholder="Type a message..." />
+    <button id="send">Send</button>
+
+    <script>
+        const conn = new WebSocket('ws://localhost:9090');
+        const messages = document.getElementById('messages');
+        const messageInput = document.getElementById('message');
+        const sendButton = document.getElementById('send');
+
+        conn.onopen = function(e) {
+            console.log("Connection established!");
+        };
+
+        conn.onmessage = function(e) {
+            const message = document.createElement('div');
+            message.textContent = e.data;
+            messages.appendChild(message);
+        };
+
+        sendButton.onclick = function() {
+            const message = messageInput.value;
+            conn.send(message);
+            messageInput.value = '';
+        };
+
+        messageInput.onkeypress = function(e) {
+            if (e.keyCode === 13) {
+                sendButton.click();
+            }
+        };
+    </script>
+</body>
+</html>
